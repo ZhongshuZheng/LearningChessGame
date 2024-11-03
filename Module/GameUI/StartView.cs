@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ViewTypes 
+/// <summary>
+/// Start view page
+/// </summary>
+public class StartView : BaseView
 {
-    StartView
-
 }

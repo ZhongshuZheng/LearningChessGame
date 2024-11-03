@@ -20,7 +20,7 @@ public class ViewInfo
 public class ViewManager 
 {
     public Transform canvasTf; // current canvas transform
-    public Transform worlddCanvasTf; // world canvas transform
+    public Transform worldCanvasTf; // world canvas transform
     private Dictionary<int, IBaseView> _opens; // opened views
     private Dictionary<int, IBaseView> _viewCache; // views cache before opening
     private Dictionary<int, ViewInfo> _views; // view info dictionary
@@ -28,7 +28,7 @@ public class ViewManager
     public ViewManager()
     {
         canvasTf = GameObject.Find("Canvas").transform;
-        canvasTf = GameObject.Find("WorldCanvas").transform;
+        worldCanvasTf = GameObject.Find("WorldCanvas").transform;
 
         _opens = new Dictionary<int, IBaseView>();
         _viewCache = new Dictionary<int, IBaseView>();
@@ -43,6 +43,11 @@ public class ViewManager
         {
             _views[key] = viewinfo;
         }
+    }
+
+    public void Register(ViewTypes viewtype, ViewInfo viewinfo)
+    {
+        Register((int)viewtype, viewinfo);
     }
 
     public void UnRegister(int key)
@@ -114,7 +119,7 @@ public class ViewManager
         if (view == null)
         {
             // 1. Load teh prefab as game-object
-            GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load($"Views{viewInfo.PrefabName}")) as GameObject;
+            GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load($"View/{viewInfo.PrefabName}")) as GameObject;
 
             // 2. Add some necessary components as a view
             Canvas canvas = uiObj.GetComponent<Canvas>();
@@ -155,6 +160,11 @@ public class ViewManager
         view.SetVisible(true);
         view.Open(args);
         viewInfo.controller.OpenView(view);
+    }
+
+    public void Open(ViewTypes viewtype, params object[] args)
+    {
+        Open((int)viewtype, args);
     }
 
     // Close

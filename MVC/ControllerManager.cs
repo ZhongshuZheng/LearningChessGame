@@ -26,11 +26,24 @@ public class ControllerManager
         }
     }
 
+    public void Register(ControllerTypes type, BaseController controller)
+    {
+        Register((int)type, controller);
+    }
+
     public void UnRegister(int controllersKey) 
     {
         if (_modules.ContainsKey(controllersKey))
         {
             _modules.Remove(controllersKey);
+        }
+    }
+
+    public void InitAllModules() 
+    {
+        foreach (var item in _modules)
+        {
+            item.Value.Init();
         }
     }
 

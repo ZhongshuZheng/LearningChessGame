@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class BaseController 
 {
-    private Dictionary<string, Action<object[]>> message; // message dictionary
+    private Dictionary<string, Action<object[]>> message; // message dictionary, with functions used for this controller in it
     private BaseModel model; // model
 
     public BaseController()
@@ -17,11 +17,15 @@ public class BaseController
         message = new Dictionary<string, Action<object[]>>();
     }
 
+    public virtual void Init()
+    {
+        // to initialize some things after *ALL* the needed controllers have been constructed and registered
+    }
+
     public virtual void Destory()
     {
         RemoveModuleEvent();
         RemoveGlobalEvent();
-
     }
 
 
@@ -95,8 +99,14 @@ public class BaseController
         GameApp.ControllerManager.ApplyFunc(controllerKey, eventName, args);
     }
 
+    public void ApplyControllerFunc(ControllerTypes type, string eventName, params object[] args)
+    {
+        ApplyControllerFunc((int)type, eventName, args);
+    }
+    
+
     // Module Func --------------------------
-    public virtual void InitModuleEvent() {}
+    public virtual void InitModuleEvent() {}    // normally is used to register some events for the controller into Dict
     public virtual void RemoveModuleEvent() {}
     public virtual void InitGlobalEvent() {}
     public virtual void RemoveGlobalEvent() {}
