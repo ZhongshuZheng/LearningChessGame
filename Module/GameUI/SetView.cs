@@ -14,12 +14,13 @@ public class SetView : BaseView
     {
         base.OnAwake();
         Find<Button>("bg/closeBtn").onClick.AddListener(onCloseBtn);
-    }
+        Find<Toggle>("bg/IsOpnSound").onValueChanged.AddListener(onIsStopBtn);
+        Find<Slider>("bg/soundCount").onValueChanged.AddListener(onSliderBgmBtn);
+        Find<Slider>("bg/effectCount").onValueChanged.AddListener(onSliderEffectBtn);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        Find<Toggle>("bg/IsOpnSound").isOn = GameApp.SoundManager.IsStop;
+        Find<Slider>("bg/soundCount").value = GameApp.SoundManager.BgmVolume;
+        Find<Slider>("bg/effectCount").value = GameApp.SoundManager.EffectVolume;
     }
 
 
@@ -27,6 +28,21 @@ public class SetView : BaseView
     private void onCloseBtn() 
     {
         GameApp.ViewManager.Close(ViewId);
+    }
+
+    private void onIsStopBtn(bool isStop) 
+    {
+        GameApp.SoundManager.IsStop = isStop;
+    }
+
+    private void onSliderBgmBtn(float value)
+    {
+        GameApp.SoundManager.BgmVolume = value;
+    }
+
+    private void onSliderEffectBtn(float value)
+    {
+        GameApp.SoundManager.EffectVolume = value;
     }
 
 }

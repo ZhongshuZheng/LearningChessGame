@@ -10,6 +10,7 @@ public class ViewInfo
     public string PrefabName; // name of the prefab
     public Transform parentTf; // parent transform which the view is attached
     public BaseController controller; // controller which the view is attached
+    public int SortingOrder;  // sorting order in the canvas
 
 }
 
@@ -132,6 +133,7 @@ public class ViewManager
                 uiObj.AddComponent<GraphicRaycaster>();
             }
             canvas.overrideSorting = true;   // can be reset the canvas layer
+            canvas.sortingOrder = viewInfo.SortingOrder;
 
             // 3. Add scirpt into the game-object
             string view_type = ((ViewTypes)key).ToString();  // get name from ViewType Enum

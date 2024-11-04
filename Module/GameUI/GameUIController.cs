@@ -13,13 +13,22 @@ public class GameUIController : BaseController
         GameApp.ViewManager.Register(ViewTypes.StartView, new ViewInfo() {
             PrefabName = "StartView", 
             controller = this, 
-            parentTf = GameApp.ViewManager.canvasTf
+            parentTf = GameApp.ViewManager.canvasTf,
+            SortingOrder = 0
         });
         // Set menu View
         GameApp.ViewManager.Register(ViewTypes.SetView, new ViewInfo() {
             PrefabName = "SetView", 
             controller = this, 
-            parentTf = GameApp.ViewManager.canvasTf
+            parentTf = GameApp.ViewManager.canvasTf,
+            SortingOrder = 1
+        });
+        // Message View
+        GameApp.ViewManager.Register(ViewTypes.MessageView, new ViewInfo() {
+            PrefabName = "MessageView", 
+            controller = this, 
+            parentTf = GameApp.ViewManager.canvasTf,
+            SortingOrder = 999
         });
 
 
@@ -31,6 +40,7 @@ public class GameUIController : BaseController
     {
         RegisterFunc(Defines.openStartView, openStartView);
         RegisterFunc(Defines.openSetView, openSetView);
+        RegisterFunc(Defines.openMessageView, openMessageView);
     }
 
 
@@ -43,5 +53,9 @@ public class GameUIController : BaseController
     private void openSetView(params object[] args) 
     {
         GameApp.ViewManager.Open(ViewTypes.SetView, args);
+    }
+
+    private void openMessageView(params object[] args) {
+        GameApp.ViewManager.Open(ViewTypes.MessageView, args);
     }
 }

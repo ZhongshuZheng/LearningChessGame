@@ -27,5 +27,17 @@ public class StartView : BaseView
     }
 
     private void onQuitBtn()
-    {}
+    {
+        // is equated to "Controller.ApplyFunc" used here
+        Controller.ApplyControllerFunc(ControllerTypes.GameUIController, Defines.openMessageView, new MessageInfo() {
+            msgTxt = "Sure to quit?",
+            okCallback = () => {
+                #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                #else
+                    Application.Quit();
+                #endif
+            },
+        });
+    }
 }

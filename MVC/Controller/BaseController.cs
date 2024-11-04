@@ -89,7 +89,7 @@ public class BaseController
         }
         else 
         {
-            Debug.LogError($"Controller Error: No handler found for event: {eventName}");
+            Debug.LogError($"Controller Error: No handler found for event: {eventName}, seems do not register in this controller?");
         }
     }
 
