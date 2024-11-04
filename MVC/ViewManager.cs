@@ -119,7 +119,7 @@ public class ViewManager
         if (view == null)
         {
             // 1. Load teh prefab as game-object
-            GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load($"View/{viewInfo.PrefabName}")) as GameObject;
+            GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load($"View/{viewInfo.PrefabName}"), viewInfo.parentTf) as GameObject;
 
             // 2. Add some necessary components as a view
             Canvas canvas = uiObj.GetComponent<Canvas>();

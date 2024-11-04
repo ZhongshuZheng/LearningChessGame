@@ -11,7 +11,7 @@ public class BaseView : MonoBehaviour, IBaseView
     public BaseController Controller {get; set; }
 
     protected Canvas _canvas;
-    protected Dictionary<string, GameObject> m_cache_gos = new Dictionary<string, GameObject>();    // Cache for game objects
+    protected Dictionary<string, GameObject> m_cache_gos = new Dictionary<string, GameObject>();    // Cache for game objects (after be found), record the things in the view
 
     private bool _isInit = false;
 
@@ -64,6 +64,7 @@ public class BaseView : MonoBehaviour, IBaseView
 
 
     // Operations --------------------------------
+    // these operations are usually called by ViewManager
     public virtual void Open(params object[] args)
     {
     }
@@ -98,6 +99,7 @@ public class BaseView : MonoBehaviour, IBaseView
 
 
     // GameObject Get Funs --------------------------------
+    // used to get things and buttons from the view
     public GameObject Find(string res) 
     {
         if (!m_cache_gos.ContainsKey(res))

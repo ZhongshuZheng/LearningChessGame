@@ -15,6 +15,12 @@ public class GameUIController : BaseController
             controller = this, 
             parentTf = GameApp.ViewManager.canvasTf
         });
+        // Set menu View
+        GameApp.ViewManager.Register(ViewTypes.SetView, new ViewInfo() {
+            PrefabName = "SetView", 
+            controller = this, 
+            parentTf = GameApp.ViewManager.canvasTf
+        });
 
 
         InitGlobalEvent();
@@ -24,11 +30,18 @@ public class GameUIController : BaseController
     public override void InitModuleEvent()
     {
         RegisterFunc(Defines.openStartView, openStartView);
+        RegisterFunc(Defines.openSetView, openSetView);
     }
+
 
     // Call back function to be register in module --------------------------------
     private void openStartView(params object[] args) 
     {
         GameApp.ViewManager.Open(ViewTypes.StartView, args);
+    }
+
+    private void openSetView(params object[] args) 
+    {
+        GameApp.ViewManager.Open(ViewTypes.SetView, args);
     }
 }
