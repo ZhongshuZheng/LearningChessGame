@@ -19,7 +19,13 @@ public class StartView : BaseView
 
     // Button Events ----------------------------------------------------------------
     private void onStartBtn()
-    {}
+    {
+        GameApp.ViewManager.Close(ViewId);
+
+        LoadingModel loadingModel = new LoadingModel();
+        loadingModel.SceneName = "map";
+        Controller.ApplyControllerFunc(ControllerTypes.LoadingController, Defines.loadingScence, loadingModel);
+    }
 
     private void onSetBtn()
     {

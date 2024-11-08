@@ -23,7 +23,7 @@ public class ViewManager
     public Transform canvasTf; // current canvas transform
     public Transform worldCanvasTf; // world canvas transform
     private Dictionary<int, IBaseView> _opens; // opened views
-    private Dictionary<int, IBaseView> _viewCache; // views cache before opening
+    private Dictionary<int, IBaseView> _viewCache; // views cache, if a view has been ever opened, it will be stored in cache
     private Dictionary<int, ViewInfo> _views; // view info dictionary
 
     public ViewManager()

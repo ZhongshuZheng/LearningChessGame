@@ -14,6 +14,9 @@ public class BaseModel
         Controller = controller;
     }
 
+    public BaseModel() {
+    }
+
     public void Init() 
     {
 

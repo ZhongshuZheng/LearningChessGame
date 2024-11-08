@@ -15,12 +15,14 @@ public class GameApp : Singleton<GameApp>
     public static SoundManager SoundManager;
     public static ControllerManager ControllerManager;
     public static ViewManager ViewManager;
+    public static ConfigManager ConfigManager;
 
     public override void Init()
     {
         SoundManager = new SoundManager();
         ControllerManager = new ControllerManager();
         ViewManager = new ViewManager();
+        ConfigManager = new ConfigManager();
     }
 
     public override void Update(float dt)

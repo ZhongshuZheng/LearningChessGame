@@ -4,6 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// Base class for view
+/// 
+/// i dont know why a view must be attached to a specific controller for now. I think they could be sepreated
 /// </summary>
 public class BaseView : MonoBehaviour, IBaseView
 {

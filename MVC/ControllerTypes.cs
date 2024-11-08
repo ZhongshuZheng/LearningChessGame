@@ -5,5 +5,6 @@ using UnityEngine;
 public enum ControllerTypes 
 {
     GameUIController,
-    Game    // main game controller
+    Game,    // main game controller
+    LoadingController
 }

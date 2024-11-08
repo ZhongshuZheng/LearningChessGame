@@ -6,6 +6,10 @@ using UnityEngine;
 
 /// <summary>
 /// Base class for Controler
+/// 
+/// we put all the functions into the DICTIONART in order to make it easier to extend the function. But is it the best way?
+/// in my point of view, it seems to be same to create controllers in the ControllerManager and call them directly, 
+/// without the controller dictionary and message dictionary
 /// </summary>
 public class BaseController 
 {
@@ -40,6 +44,7 @@ public class BaseController
     public void SetModel(BaseModel model)
     {
         this.model = model;
+        model.Controller = this;
     }
 
     public BaseModel GetModel()
