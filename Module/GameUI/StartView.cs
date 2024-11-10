@@ -24,6 +24,9 @@ public class StartView : BaseView
 
         LoadingModel loadingModel = new LoadingModel();
         loadingModel.SceneName = "map";
+        loadingModel.callback = () => {
+            Controller.ApplyControllerFunc(ControllerTypes.LevelController, Defines.openSelectLevelView);
+        };
         Controller.ApplyControllerFunc(ControllerTypes.LoadingController, Defines.loadingScence, loadingModel);
     }
 

@@ -6,5 +6,6 @@ public enum ControllerTypes
 {
     GameUIController,
     Game,    // main game controller
-    LoadingController
+    LoadingController,
+    LevelController, // select level controller
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 /// <summary>
@@ -16,6 +17,8 @@ public class GameApp : Singleton<GameApp>
     public static ControllerManager ControllerManager;
     public static ViewManager ViewManager;
     public static ConfigManager ConfigManager;
+    public static CameraManager CameraManager;
+    public static MessageCenter MsgCenter;
 
     public override void Init()
     {
@@ -23,6 +26,8 @@ public class GameApp : Singleton<GameApp>
         ControllerManager = new ControllerManager();
         ViewManager = new ViewManager();
         ConfigManager = new ConfigManager();
+        CameraManager = new CameraManager();
+        MsgCenter = new MessageCenter();
     }
 
     public override void Update(float dt)

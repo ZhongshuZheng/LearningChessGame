@@ -71,6 +71,7 @@ public class ControllerManager
         }
         else 
         {
+            Debug.LogError($"size: {_modules.Count()}");
             Debug.LogError($"ContorllerManager Error: No controller found with key {controllersKey}");
         }
     }

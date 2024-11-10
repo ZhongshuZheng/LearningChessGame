@@ -16,12 +16,13 @@ public class GameScene : MonoBehaviour
     float dt;
     public Texture2D mouseTxt; // mouse pointer
 
-    private bool isLoaded = false;
+    private static bool isLoaded = false;  // a kind of easy singleton
 
     public void Awake() 
     {
         if (isLoaded == true) {
-            // i dont know why to do this. Maybe it is to keep that there is only one GameScene, a kind of singleton with MonoBehaviour
+            // It is to keep that there is only one GameScene, a kind of singleton with MonoBehaviour. For the reason that
+            // gameScene is attached to game Scene, it will build a new GameScene class when we turn to the "game" scene again.
             Destroy(gameObject);
         } else {
             isLoaded = true;
@@ -55,6 +56,7 @@ public class GameScene : MonoBehaviour
         GameApp.ControllerManager.Register(ControllerTypes.GameUIController, new GameUIController());
         GameApp.ControllerManager.Register(ControllerTypes.Game, new GameController());
         GameApp.ControllerManager.Register(ControllerTypes.LoadingController, new LoadingController());
+        GameApp.ControllerManager.Register(ControllerTypes.LevelController, new LevelController());
 
     }
 

@@ -9,9 +9,15 @@ public static class Defines
     public static readonly string openSetView = "openSetView";
     public static readonly string openMessageView = "openMessageView";
 
-    // enven names for LoadingController
+    // event names for LoadingController
     public static readonly string loadingScence = "loadingScence";
 
+    // event names for LevelController
+    public static readonly string openSelectLevelView = "openSelectLevelView";
 
+
+    // Global Message Func
+    public static readonly string showLevelDesEvent = "showLevelDesEvent";
+    public static readonly string hideLevelDesEvent = "hideLevelDesEvent";
 
 }
