@@ -15,8 +15,14 @@ public class LevelController : BaseController
             SortingOrder = 0
         });
 
+        SetModel(new LevelModel());
+
         InitModuleEvent();
         InitGlobalEvent();
+    }
+
+    public override void Init() {
+        GetModel().Init();
     }
 
 
@@ -42,7 +48,11 @@ public class LevelController : BaseController
     }
 
     private void showLevelDesEvent(object arg) {
-        GameApp.ViewManager.GetView<SelectLevelView>((int)ViewTypes.SelectLevelView).ShowLevelDes();
+        LevelModel model = GetModel<LevelModel>();
+        model.currentLevel = model.GetLevel((int)arg);
+        GameApp.ViewManager.GetView<SelectLevelView>((int)ViewTypes.SelectLevelView).ShowLevelDes(
+            model.currentLevel
+        );
     }
 
     private void hideLevelDesEvent(object arg) {

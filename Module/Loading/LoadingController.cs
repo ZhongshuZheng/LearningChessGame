@@ -46,9 +46,14 @@ public class LoadingController : BaseController
 
     private void onLoadedEndCallBack(AsyncOperation op) {
         op.completed -= onLoadedEndCallBack;
-        GetModel<LoadingModel>().callback?.Invoke();
 
-        GameApp.ViewManager.Close((int)ViewTypes.LoadingView);
+        // delay for a little while
+        GameApp.TimerManager.Register(1f, () => {
+
+            GetModel<LoadingModel>().callback?.Invoke();
+
+            GameApp.ViewManager.Close((int)ViewTypes.LoadingView);
+        });
     }
 
 }

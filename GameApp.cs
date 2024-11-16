@@ -19,6 +19,8 @@ public class GameApp : Singleton<GameApp>
     public static ConfigManager ConfigManager;
     public static CameraManager CameraManager;
     public static MessageCenter MsgCenter;
+    public static TimerManager TimerManager;
+    public static FightWorldManager FightManager;
 
     public override void Init()
     {
@@ -28,10 +30,14 @@ public class GameApp : Singleton<GameApp>
         ConfigManager = new ConfigManager();
         CameraManager = new CameraManager();
         MsgCenter = new MessageCenter();
+        TimerManager = new TimerManager(); 
+        FightManager = new FightWorldManager();
     }
 
     public override void Update(float dt)
     {
         // Debug.Log(dt);
+        TimerManager.Update(dt);
+        FightManager.Update(dt);
     }
 }

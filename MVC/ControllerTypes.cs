@@ -8,4 +8,5 @@ public enum ControllerTypes
     Game,    // main game controller
     LoadingController,
     LevelController, // select level controller
+    FightController, 
 }

@@ -17,7 +17,7 @@ public class BaseModel
     public BaseModel() {
     }
 
-    public void Init() 
+    public virtual void Init() 
     {
 
     }

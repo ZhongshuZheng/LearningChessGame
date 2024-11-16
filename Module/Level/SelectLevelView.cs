@@ -13,6 +13,7 @@ public class SelectLevelView : BaseView
     {
         base.OnStart();
         Find<Button>("close").onClick.AddListener(OnCloseBtn);
+        Find<Button>("level/fightBtn").onClick.AddListener(OnBattleBtn);
 
     }
 
@@ -25,11 +26,26 @@ public class SelectLevelView : BaseView
         ApplyControllerFunction((int)ControllerTypes.LoadingController, Defines.loadingScence, loadingModel);
     }
 
-    public void ShowLevelDes() {
+    public void ShowLevelDes(LevelData levelData) {
+        Find<Text>("level/name/txt").text = levelData.name;
+        Find<Text>("level/des/txt").text = levelData.des;
         Find("level").SetActive(true);
     }
 
     public void HideLevelDes() {
         Find("level").SetActive(false);
+    }
+
+    public void OnBattleBtn() {
+        GameApp.ViewManager.Close(ViewId);
+        GameApp.CameraManager.ResetPostion();
+
+        LoadingModel loadingModel = new LoadingModel();
+        loadingModel.SceneName = Controller.GetModel<LevelModel>().currentLevel.sceneName;
+        loadingModel.callback = () => {
+            // show some thing about battle view
+            Controller.ApplyControllerFunc((int)ControllerTypes.FightController, Defines.beginFight);
+        };
+        ApplyControllerFunction((int)ControllerTypes.LoadingController, Defines.loadingScence, loadingModel);
     }
 }

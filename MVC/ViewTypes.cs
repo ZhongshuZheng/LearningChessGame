@@ -8,6 +8,8 @@ public enum ViewTypes
     SetView,
     MessageView,
     LoadingView,
-    SelectLevelView
+    SelectLevelView,
+    FightView,
+    FightSelectHeroView,
 
 }

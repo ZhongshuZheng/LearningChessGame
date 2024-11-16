@@ -68,8 +68,8 @@ public class SoundManager
         clips = new Dictionary<string, AudioClip>();
 
         isStop = false;
-        bgmVolume = 0.5f;
-        effectVolume = 0.5f;
+        bgmVolume = 0.2f;
+        effectVolume = 0.2f;
     }
 
     public void playBGM(string res) 

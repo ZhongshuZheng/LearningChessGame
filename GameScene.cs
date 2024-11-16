@@ -57,6 +57,7 @@ public class GameScene : MonoBehaviour
         GameApp.ControllerManager.Register(ControllerTypes.Game, new GameController());
         GameApp.ControllerManager.Register(ControllerTypes.LoadingController, new LoadingController());
         GameApp.ControllerManager.Register(ControllerTypes.LevelController, new LevelController());
+        GameApp.ControllerManager.Register(ControllerTypes.FightController, new FightController());
 
     }
 
