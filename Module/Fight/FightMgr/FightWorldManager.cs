@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum GameState {
     Idle,
+    Enter,
 }
 
 /// <summary>
@@ -37,6 +38,9 @@ public class FightWorldManager {
         switch (state) {
             case GameState.Idle:
                 _current = new FightIdle();
+                break;
+            case GameState.Enter:
+                _current = new FightEnter();
                 break;
         }
         _current.Init();
