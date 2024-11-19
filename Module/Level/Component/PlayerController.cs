@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// control the player
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
 
