@@ -48,7 +48,7 @@ public class LoadingController : BaseController
         op.completed -= onLoadedEndCallBack;
 
         // delay for a little while
-        GameApp.TimerManager.Register(1f, () => {
+        GameApp.TimerManager.Register(0.45f, () => {
 
             GetModel<LoadingModel>().callback?.Invoke();
 

@@ -11,5 +11,6 @@ public enum ViewTypes
     SelectLevelView,
     FightView,
     FightSelectHeroView,
+    DragHeroView,
 
 }

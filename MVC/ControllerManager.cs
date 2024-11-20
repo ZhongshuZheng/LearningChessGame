@@ -6,6 +6,9 @@ using UnityEngine;
 
 /// <summary>
 /// One Manager to rule all the controllers
+/// 
+/// In this Structure, Controllers are used usuall for control/operator with the VIEWs. The Controller do not save any thing.
+/// As for the other logic, we use kinds of xxxManager. The manager can save variables.
 /// </summary>
 public class ControllerManager 
 {

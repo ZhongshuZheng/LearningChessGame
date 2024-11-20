@@ -6,6 +6,9 @@ using UnityEngine;
 /// Base class for view
 /// 
 /// i dont know why a view must be attached to a specific controller for now. I think they could be sepreated
+/// 
+/// Besides, this *VIEW* in this structure can be regarded as a kind of MonoBehaviour with a useful "Open" and "Find" method. The author use
+/// this view-class ot controll the prefabs that can be "open" and used as a UI element. As for the other prefabs, they use MonoBehaviour directly
 /// </summary>
 public class BaseView : MonoBehaviour, IBaseView
 {

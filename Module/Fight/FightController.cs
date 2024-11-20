@@ -21,6 +21,12 @@ public class FightController : BaseController {
             controller = this, 
             SortingOrder = 1
         });        
+        GameApp.ViewManager.Register(ViewTypes.DragHeroView, new ViewInfo() {
+            PrefabName = "DragHeroView",
+            parentTf = GameApp.ViewManager.worldCanvasTf,  // I don't know what is the difference exactly
+            controller = this, 
+            SortingOrder = 2
+        });
 
         InitModuleEvent();
         InitGlobalEvent();

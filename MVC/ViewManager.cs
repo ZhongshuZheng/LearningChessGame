@@ -20,8 +20,8 @@ public class ViewInfo
 /// </summary>
 public class ViewManager 
 {
-    public Transform canvasTf; // current canvas transform
-    public Transform worldCanvasTf; // world canvas transform
+    public Transform canvasTf; // current canvas transform, in this project it is about the Screen
+    public Transform worldCanvasTf; // world canvas transform, in this project it seems is about the Map
     private Dictionary<int, IBaseView> _opens; // opened views
     private Dictionary<int, IBaseView> _viewCache; // views cache, if a view has been ever opened, it will be stored in cache
     private Dictionary<int, ViewInfo> _views; // view info dictionary

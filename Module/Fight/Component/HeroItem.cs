@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
 /// <summary>
-/// Hero item mono behaviour
+/// Hero item (in the select bar) mono behaviour
 /// </summary>
-public class HeroItem : MonoBehaviour
+public class HeroItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
     Dictionary<string, string> heroData;
@@ -28,5 +29,27 @@ public class HeroItem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnBeginDrag(PointerEventData eventData) {
+        GameApp.ViewManager.Open(ViewTypes.DragHeroView, heroData["Icon"]);
+    }
+
+    public void OnEndDrag(PointerEventData eventData) {
+        GameApp.ViewManager.Close((int)ViewTypes.DragHeroView);
+
+        Tools.ScreenPointToRay2D(Camera.main, (Collider2D col) => {
+            if (col != null) {
+                Block b = col.GetComponent<Block>();
+                if (b != null && b.Type != BlockType.Obstacle) { 
+                    GameApp.FightManager.AddHero(b, heroData);
+                    Destroy(gameObject);
+                }
+            }
+        });
+
+    }
+
+    public void OnDrag(PointerEventData eventData) {
     }
 }
