@@ -23,5 +23,7 @@ public static class Defines
     // Global Message Func
     public static readonly string showLevelDesEvent = "showLevelDesEvent";
     public static readonly string hideLevelDesEvent = "hideLevelDesEvent";
+    public static readonly string OnSelectEvent = "OnSelectEvent";
+    public static readonly string OnUnSelectEvent = "OnUnSelectEvent";
 
 }

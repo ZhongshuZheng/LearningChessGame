@@ -27,7 +27,13 @@ public class Block : MonoBehaviour {
         selectSp = transform.Find("select").GetComponent<SpriteRenderer>();
         gridSp = transform.Find("grid").GetComponent<SpriteRenderer>();
         dirSp = transform.Find("dir").GetComponent<SpriteRenderer>();
+
+        GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnSelectCallBack);
     } 
+
+    private void OnSelectCallBack(object arg) {
+        GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+    }
 
     private void OnMouseEnter() {
         selectSp.enabled = true;
@@ -35,6 +41,15 @@ public class Block : MonoBehaviour {
 
     private void OnMouseExit() {
         selectSp.enabled = false;
+    }
+
+    public void ShowGrid(Color color) {
+        gridSp.enabled = true;
+        gridSp.color = color;
+    }
+
+    public void HideGrid() {
+        gridSp.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -48,4 +63,5 @@ public class Block : MonoBehaviour {
     {
         
     }
+
 }

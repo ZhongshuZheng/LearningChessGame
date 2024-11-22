@@ -6,6 +6,9 @@ using System.Linq;
 
 /// <summary>
 /// message center
+/// 
+/// msgDic: used to define some global function that every listener may answer when called
+/// objMsgDic: used to define some single function that only the specific listener will answer
 /// </summary>
 public class MessageCenter 
 {
@@ -67,11 +70,11 @@ public class MessageCenter
         }
     }
 
-    public void PostEvent(object listenerObj, string eventName, Action<object> callback) {
+    public void PostEvent(object listenerObj, string eventName, object arg=null) {
         if (!objMsgDic.ContainsKey(listenerObj)) {
             return ;
         }
-        _postevent(objMsgDic[listenerObj], eventName, callback);
+        _postevent(objMsgDic[listenerObj], eventName, arg);
     }
 
 
@@ -87,9 +90,10 @@ public class MessageCenter
     private void _unregister(Dictionary<string, Action<object>> dic, string eventName, Action<object> callback) {
         if (dic.ContainsKey(eventName)) {
             dic[eventName] -= callback;
-        }
-        if (dic[eventName] == null) {
-            dic.Remove(eventName);
+
+            if (dic[eventName] == null) {
+                dic.Remove(eventName);
+            }
         }
     }
 
@@ -97,7 +101,7 @@ public class MessageCenter
         if (dic.ContainsKey(eventName)) {
             dic[eventName].Invoke(arg);
         } else {
-            Debug.LogWarning($"MessageCenter: event {eventName} do not exist");
+            // Debug.LogWarning($"MessageCenter: event {eventName} do not exist");
         }
     }
 

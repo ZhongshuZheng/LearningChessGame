@@ -31,7 +31,35 @@ public class ModelBase : MonoBehaviour {
         ani = transform.Find("body").GetComponent<Animator>();
     }
 
-    private void Start() {}
+    protected virtual void Start() {
+        AddEvents();
+    }
+
+    protected virtual void OnDestroy() {
+        RemoveEvents();
+    }
+
     private void Update() {}
+
+    protected virtual void AddEvents() {
+        GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnSelectCallBack);
+        GameApp.MsgCenter.AddEvent(Defines.OnUnSelectEvent, OnUnSelectCallBack);
+    }
+
+    protected virtual void RemoveEvents() {
+        GameApp.MsgCenter.RemoveEvent(gameObject, Defines.OnSelectEvent, OnSelectCallBack);
+        GameApp.MsgCenter.RemoveEvent(Defines.OnUnSelectEvent, OnUnSelectCallBack);
+    }
+
+
+    // Message CallBacks ----------------------------------------------------------------
+    protected virtual void OnSelectCallBack(object arg) {
+        GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);  // tell other units to be unselected
+        GameApp.MapManager.ShowStepGrid(this);
+    }
+
+    protected virtual void OnUnSelectCallBack(object arg) {
+        GameApp.MapManager.HideStepGrid(this);
+    }
 
 }

@@ -49,5 +49,32 @@ public class MapManager {
 
     }
 
+    public BlockType GetBlockType(int row, int col) {
+        if (row < rowCount && col < colCount) {
+            return mapArr[row, col].Type;
+        }
+        Debug.LogError("MapManager: GetBlockType out of range");
+        return BlockType.Obstacle;
+    }
+
+
+    // Message ----------------------------------------------------------------
+    public void ShowStepGrid(ModelBase unit) {
+        _BFS bfs = new _BFS(rowCount, colCount);
+        List<_BFS.Point> points = bfs.Search(unit.RowIndex, unit.ColIndex, unit.Step);
+        foreach (var point in points) {
+            mapArr[point.RowIndex, point.ColumnIndex].ShowGrid(Color.blue);
+        }
+    }
+
+    public void HideStepGrid(ModelBase unit) {
+        // it is not a good implementation
+        _BFS bfs = new _BFS(rowCount, colCount);
+        List<_BFS.Point> points = bfs.Search(unit.RowIndex, unit.ColIndex, unit.Step);
+        foreach (var point in points) {
+            mapArr[point.RowIndex, point.ColumnIndex].HideGrid();
+        }
+    }
+
 
 }
