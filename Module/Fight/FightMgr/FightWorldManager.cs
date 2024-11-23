@@ -16,6 +16,8 @@ public class FightWorldManager {
     public GameState gameState = GameState.Idle;
 
     public List<Hero> heros;
+    public List<Enemy> enemies;
+    public int RoundCount;
 
     private FightUnitBase current;
     public FightUnitBase Current { 
@@ -23,7 +25,6 @@ public class FightWorldManager {
     }
 
     public FightWorldManager() {
-        heros = new List<Hero>();
         ChangeState(GameState.Idle);
     }
 
@@ -47,6 +48,18 @@ public class FightWorldManager {
                 break;
         }
         _current.Init();
+    }
+
+    public void EnterFight() {
+        heros = new List<Hero>();
+        enemies = new List<Enemy>();
+        RoundCount = 0;
+        GameObject[] emys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var enemy in emys) {
+            enemies.Add(enemy.GetComponent<Enemy>());
+        }
+        Debug.Log($"enemy count:{enemies.Count}");
     }
 
     public void AddHero(Block b, Dictionary<string, string> heroData) {
