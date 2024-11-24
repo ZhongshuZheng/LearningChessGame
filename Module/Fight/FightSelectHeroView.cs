@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /// <summary>
 /// select hero menu in fight view
 /// </summary>
 public class FightSelectHeroView : BaseView {
+
+    protected override void OnAwake() {
+        Find<Button>("bottom/startBtn").onClick.AddListener(onFightButton);
+
+    }
 
     public override void Open(params object[] args) {
         base.Open(args);
@@ -28,9 +34,12 @@ public class FightSelectHeroView : BaseView {
             heroItem.Init(heroData.GetDataById(heroId));
         }
 
+    }
 
-
-
+    private void onFightButton() {
+        // its better to check if there's no hero is selected
+        GameApp.ViewManager.Close(ViewId);
+        GameApp.FightManager.ChangeState(GameState.FightPlayerUnit);
     }
 
 }

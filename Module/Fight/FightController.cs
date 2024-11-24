@@ -27,6 +27,24 @@ public class FightController : BaseController {
             controller = this, 
             SortingOrder = 2
         });
+        GameApp.ViewManager.Register(ViewTypes.TipView, new ViewInfo() {
+            PrefabName = "TipView",
+            parentTf = GameApp.ViewManager.canvasTf,  
+            controller = this, 
+            SortingOrder = 2 
+        });
+        GameApp.ViewManager.Register(ViewTypes.HeroDesView, new ViewInfo() {
+            PrefabName = "HeroDesView",
+            parentTf = GameApp.ViewManager.canvasTf,  
+            controller = this, 
+            SortingOrder = 2
+        });
+        GameApp.ViewManager.Register(ViewTypes.EnemyDesView, new ViewInfo() {
+            PrefabName = "EnemyDesView",
+            parentTf = GameApp.ViewManager.canvasTf,  
+            controller = this, 
+            SortingOrder = 2
+        });
 
         InitModuleEvent();
         InitGlobalEvent();

@@ -6,6 +6,7 @@ using UnityEngine;
 public enum GameState {
     Idle,
     Enter,
+    FightPlayerUnit,
 }
 
 /// <summary>
@@ -46,6 +47,9 @@ public class FightWorldManager {
             case GameState.Enter:
                 _current = new FightEnter();
                 break;
+            case GameState.FightPlayerUnit:
+                _current = new FightPlayerUnit();
+                break;
         }
         _current.Init();
     }
@@ -57,7 +61,9 @@ public class FightWorldManager {
         GameObject[] emys = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (var enemy in emys) {
-            enemies.Add(enemy.GetComponent<Enemy>());
+            Enemy ienemy = enemy.GetComponent<Enemy>();
+            GameApp.MapManager.SetBlockType(ienemy.RowIndex, ienemy.ColIndex, BlockType.Obstacle);
+            enemies.Add(ienemy);
         }
         Debug.Log($"enemy count:{enemies.Count}");
     }

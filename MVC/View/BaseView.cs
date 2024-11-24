@@ -109,7 +109,12 @@ public class BaseView : MonoBehaviour, IBaseView
     {
         if (!m_cache_gos.ContainsKey(res))
         {
-            m_cache_gos.Add(res, transform.Find(res).gameObject);
+            var obj = transform.Find(res);
+            if (obj == null) {
+                Debug.LogError($"BaseView.Find: failed to find {res}");
+                return null;
+            }
+            m_cache_gos.Add(res, obj.gameObject);
         }
         return m_cache_gos[res];
     }

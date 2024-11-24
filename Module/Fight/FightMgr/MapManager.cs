@@ -53,8 +53,16 @@ public class MapManager {
         if (row < rowCount && col < colCount) {
             return mapArr[row, col].Type;
         }
-        Debug.LogError("MapManager: GetBlockType out of range");
+        Debug.LogError($"MapManager: GetBlockType out of range, from {row},{col} in {rowCount},{colCount}");
         return BlockType.Obstacle;
+    }
+
+    public void SetBlockType(int row, int col, BlockType type) {
+        if (row < rowCount && col < colCount) {
+            mapArr[row, col].Type = type;
+            return;
+        }
+        Debug.LogError("MapManager: SetBlockType out of range, from {row},{col} in {rowCount},{colCount}");
     }
 
 

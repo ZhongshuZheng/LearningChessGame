@@ -20,4 +20,16 @@ public class Hero : ModelBase {
         CurHp = MaxHp;
     }
 
+    protected override void OnSelectCallBack(object arg)
+    {
+        base.OnSelectCallBack(arg);
+        GameApp.ViewManager.Open(ViewTypes.HeroDesView, this);
+    }
+
+    protected override void OnUnSelectCallBack(object arg)
+    {
+        base.OnUnSelectCallBack(arg);
+        GameApp.ViewManager.Close((int)ViewTypes.HeroDesView);
+    }
+
 }
