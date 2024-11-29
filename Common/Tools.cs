@@ -21,5 +21,10 @@ public static class Tools {
         Collider2D col = Physics2D.OverlapCircle(pos, 0.02f);
         callBack?.Invoke(col);
     }
+    public static Collider2D ScreenPointToRay2D(Camera cam) {
+        Vector2 pos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D col = Physics2D.OverlapCircle(pos, 0.02f);
+        return col;
+    }
 
 }

@@ -24,6 +24,11 @@ public class Hero : ModelBase {
     {
         base.OnSelectCallBack(arg);
         GameApp.ViewManager.Open(ViewTypes.HeroDesView, this);
+
+        // call the showPath command
+        if (GameApp.FightManager.gameState == GameState.FightPlayerUnit && !IsStop && !GameApp.CommandManager.isRunningCommand) {
+            GameApp.CommandManager.AddCommand(new ShowPathCommand(this));
+        }
     }
 
     protected override void OnUnSelectCallBack(object arg)

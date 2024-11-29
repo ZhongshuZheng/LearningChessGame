@@ -4,6 +4,21 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
+public enum BlockDirection {
+    none = -1,
+    down,
+    horizontal,
+    left,
+    left_down,
+    left_up,
+    right,
+    right_down,
+    right_up,
+    up,
+    vertical,
+    max
+}
+
 /// <summary>
 /// Mamager for the tilemap
 /// </summary>
@@ -12,8 +27,10 @@ public class MapManager {
     private Tilemap tilemap;
     public Block[,] mapArr;
 
-    private int rowCount;
-    private int colCount;
+    public int rowCount;
+    public int colCount;
+
+    public List<Sprite> dirSpArr;  // list for the target direction
 
     public void Init() {
         tilemap = GameObject.Find("Grid/ground").GetComponent<Tilemap>();
@@ -22,6 +39,11 @@ public class MapManager {
         colCount = 20;
 
         mapArr = new Block[rowCount, colCount];
+        dirSpArr = new List<Sprite>();
+        for (int i = 0; i < (int)BlockDirection.max; i++) {
+            dirSpArr.Add(Resources.Load<Sprite>($"Icon/{(BlockDirection)i}"));
+        }
+        
 
 
         // Scan the tilemap and generate the Block
@@ -81,6 +103,70 @@ public class MapManager {
         List<_BFS.Point> points = bfs.Search(unit.RowIndex, unit.ColIndex, unit.Step);
         foreach (var point in points) {
             mapArr[point.RowIndex, point.ColumnIndex].HideGrid();
+        }
+    }
+
+    public void SetBlockDir(int row, int col, BlockDirection dir, Color color) {
+        mapArr[row, col].SetDirSp(dirSpArr[(int)dir], color);
+    }
+
+    public BlockDirection ComputeBlockDirection(AStarPoint start, AStarPoint cur, AStarPoint end) {
+        // from begin to next 
+        if (end == null) {
+            int row_offset = cur.RowIndex - start.RowIndex;
+            int col_offset = cur.ColIndex - start.ColIndex;
+            if (row_offset == 0) {
+                return BlockDirection.horizontal;
+            } else if (col_offset == 0) {
+                return BlockDirection.vertical;
+            }
+            return BlockDirection.none;
+        }
+        // from current to end
+        else if (start == null) {
+            int row_offset = end.RowIndex - cur.RowIndex;
+            int col_offset = end.ColIndex - cur.ColIndex;
+            if (col_offset > 0) {
+                return BlockDirection.right;
+            } else if (col_offset < 0) {
+                return BlockDirection.left;
+            } else if (row_offset > 0) {
+                return BlockDirection.up;
+            } else if (row_offset < 0) {
+                return BlockDirection.down;
+            } else {
+                return BlockDirection.none;
+            }
+        }
+        // from pre to current to next
+        else {
+            // when compute this direction, it is same for the current that it comes from start to end or from end to start
+            // you can draw it on the paper to check
+            int row_offset1 = cur.RowIndex - start.RowIndex;
+            int col_offset1 = cur.ColIndex - start.ColIndex;
+            int row_offset2 = cur.RowIndex - end.RowIndex;
+            int col_offset2 = cur.ColIndex - end.ColIndex;
+
+            int row_sum = row_offset1 + row_offset2;
+            int col_sum = col_offset1 + col_offset2;
+            (int r, int c) dir = (row_sum, col_sum);
+            
+            if (dir == (1, 1)) {
+                // means that the current point is at the (1,1) position of the pattern
+                return BlockDirection.left_down;
+            } else if (dir == (1, -1)) {
+                return BlockDirection.right_down;
+            } else if (dir == (-1, 1)) {
+                return BlockDirection.left_up;
+            } else if (dir == (-1, -1)) {
+                return BlockDirection.right_up;
+            } else if (row_offset1 == 0 && row_offset2 == 0) {
+                return BlockDirection.horizontal;
+            } else if (col_offset1 ==  0 && col_offset2 == 0) {
+                return BlockDirection.vertical;
+            }
+
+            return BlockDirection.none;
         }
     }
 

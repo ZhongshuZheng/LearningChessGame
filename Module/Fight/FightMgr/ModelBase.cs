@@ -25,6 +25,20 @@ public class ModelBase : MonoBehaviour {
     public GameObject stopObj;  // the symbol when finished the action
     public Animator ani; 
 
+    private bool _isStop;  // if the action in turn is over
+    public bool IsStop {
+        get { return _isStop; }
+        set {
+            stopObj.SetActive(value);
+            if (value == true) {
+                bodySp.color = Color.gray;
+            } else {
+                bodySp.color = Color.white;
+            }
+            _isStop = value;
+        }
+    }
+
     private void Awake() {
         bodySp = transform.Find("body").GetComponent<SpriteRenderer>();
         stopObj = transform.Find("stop").gameObject;

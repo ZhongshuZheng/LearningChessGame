@@ -29,10 +29,14 @@ public class Block : MonoBehaviour {
         dirSp = transform.Find("dir").GetComponent<SpriteRenderer>();
 
         GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnSelectCallBack);
+        GameApp.MsgCenter.AddEvent(gameObject, Defines.OnSelectEvent, OnUnSelectCallBack);
     } 
 
     private void OnSelectCallBack(object arg) {
         GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+    }
+    private void OnUnSelectCallBack(object arg) {
+        dirSp.sprite = null;
     }
 
     private void OnMouseEnter() {
@@ -50,6 +54,12 @@ public class Block : MonoBehaviour {
 
     public void HideGrid() {
         gridSp.enabled = false;
+    }
+
+    // set the arrow direction in the block
+    public void SetDirSp(Sprite sp, Color color) {
+        dirSp.sprite = sp;
+        dirSp.color = color;
     }
 
     // Start is called before the first frame update
