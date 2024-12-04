@@ -76,4 +76,38 @@ public class ModelBase : MonoBehaviour {
         GameApp.MapManager.HideStepGrid(this);
     }
 
+    // Animations and Actions ----------------------------------------------------------------
+    public void Flip() {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    public virtual bool Move(int rowIndex, int columnIndex, float dt) {
+        Vector3 pos = GameApp.MapManager.GetBlockPosition(rowIndex, columnIndex);
+        if (pos == null) {return true;}
+
+        pos.z = transform.position.z;
+
+        // turn round
+        if ((pos.x > transform.position.x && transform.localScale.x < 0) || (pos.x < transform.position.x && transform.localScale.x > 0) ) {
+            Flip();
+        }
+
+        // too close to target, return true as finished the movement
+        if (Vector3.Distance(pos, transform.position) < 0.02f) {
+            RowIndex = rowIndex;
+            ColIndex = columnIndex;
+            transform.position = pos;
+            return true;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, pos, dt);
+        return false;
+    }
+
+    public void PlayAnimation(string animName) {
+        ani.Play(animName);
+    }
+
 }

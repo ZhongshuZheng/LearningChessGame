@@ -71,6 +71,10 @@ public class MapManager {
 
     }
 
+    public Vector3 GetBlockPosition(int row, int col) {
+        return mapArr[row, col].transform.position;
+    }
+
     public BlockType GetBlockType(int row, int col) {
         if (row < rowCount && col < colCount) {
             return mapArr[row, col].Type;

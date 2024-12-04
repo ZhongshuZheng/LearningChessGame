@@ -17,7 +17,7 @@ public class CommandManager {
         unDoStack = new Stack<BaseCommand>();
     }
 
-    public bool isRunningCommand { get { return currentCommand != null; }}
+    public bool isRunningCommand { get {return currentCommand != null; }}
 
     public void AddCommand(BaseCommand command) {
         willDoCommandsQueue.Enqueue(command);

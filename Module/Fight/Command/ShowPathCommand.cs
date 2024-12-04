@@ -26,24 +26,31 @@ public class ShowPathCommand : BaseCommand {
 
     public override bool Update(float dt) {
 
-        if (Input.GetMouseButtonDown(0)) {
-            // click the left mouse and going on the movement
-            GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
-            ClearPreDirections();
-
-
-            return true;
-        }
         Collider2D col = Tools.ScreenPointToRay2D(Camera.main);
         if (col != null && col != preBlock) {
             preBlock = col;
             Block pointTo = col.GetComponent<Block>();
 
             ClearPreDirections();
+            prePath.Clear();
+
             if (pointTo != null) {
                 AStarPoint end = new AStarPoint(pointTo.RowIndex, pointTo.ColIndex);
                 astar.FindPath(start, end, UpdatePath);
             }
+        }
+
+        // if click
+        if (Input.GetMouseButtonDown(0)) {
+            // click the left mouse and going on the movement
+            GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+
+            if (col == preBlock && prePath.Count > 0) {
+                GameApp.CommandManager.AddCommand(new MoveCommand(model, prePath));
+            } 
+
+            ClearPreDirections();
+            return true;
         }
 
         return false;
@@ -51,6 +58,7 @@ public class ShowPathCommand : BaseCommand {
 
     private void UpdatePath(List<AStarPoint> path) {
         if (path.Count < 2 || path.Count - 1 > model.Step) {
+            prePath.Clear();
             return;
         }
         for (int i = 1; i < path.Count; i++) {
@@ -70,7 +78,6 @@ public class ShowPathCommand : BaseCommand {
         foreach (var point in prePath) {
             GameApp.MapManager.mapArr[point.RowIndex, point.ColIndex].SetDirSp(null, Color.white);
         }
-        prePath.Clear();
     }
 
 }
