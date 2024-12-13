@@ -15,5 +15,6 @@ public enum ViewTypes
     TipView,
     HeroDesView,
     EnemyDesView,
+    SelectOptionView,
 
 }

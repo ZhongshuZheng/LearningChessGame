@@ -15,7 +15,7 @@ using UnityEngine;
 public class BaseController 
 {
     private Dictionary<string, Action<object[]>> message; // message dictionary, with functions used for this controller in it
-    private BaseModel model; // model
+    public BaseModel model; // model
 
     public BaseController()
     {

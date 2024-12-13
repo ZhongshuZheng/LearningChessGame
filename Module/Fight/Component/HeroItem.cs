@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Hero item (in the select bar) mono behaviour
+/// 
+/// In fact, It is a kind of view, just a view contianed by a view
 /// </summary>
 public class HeroItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {

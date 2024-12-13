@@ -17,6 +17,9 @@ public class ViewInfo
 
 /// <summary>
 /// manager to manage all the views
+/// 
+/// Mainly to Open or Close Views. I thing that this class and functions can be merged with the BaseController 
+/// for that all the view are registered and controlled by specified controller
 /// </summary>
 public class ViewManager 
 {

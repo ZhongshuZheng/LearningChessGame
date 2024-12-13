@@ -9,6 +9,8 @@ using UnityEngine;
 public class FightController : BaseController {
 
     public FightController() : base() {
+        SetModel(new FightModel(this));
+
         GameApp.ViewManager.Register(ViewTypes.FightView, new ViewInfo() {
             PrefabName = "FightView",
             parentTf = GameApp.ViewManager.canvasTf, 
@@ -45,9 +47,19 @@ public class FightController : BaseController {
             controller = this, 
             SortingOrder = 2
         });
+        GameApp.ViewManager.Register(ViewTypes.SelectOptionView, new ViewInfo() {
+            PrefabName = "SelectOptionView",
+            parentTf = GameApp.ViewManager.canvasTf,  
+            controller = this, 
+            SortingOrder = 2
+        });
 
         InitModuleEvent();
         InitGlobalEvent();
+    }
+
+    public override void Init() {
+        model.Init();
     }
 
     public override void InitModuleEvent() {

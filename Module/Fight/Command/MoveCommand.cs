@@ -36,9 +36,12 @@ public class MoveCommand : BaseCommand {
             return false;
         }
 
-        model.PlayAnimation("idle");
         // finished all the paths movement
-        Debug.Log(123);
+        model.PlayAnimation("idle");
+
+        // show action options list
+        GameApp.ViewManager.Open(ViewTypes.SelectOptionView, model, new Vector2(model.transform.position.x, model.transform.position.y));
+
         return true;
     }
 
