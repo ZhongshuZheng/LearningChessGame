@@ -20,7 +20,7 @@ public class OptionItem : MonoBehaviour {
 
     void Start() {
         GetComponent<Button>().onClick.AddListener(() => {
-            GameApp.MsgCenter.PostEvent(op_data.EventName);
+            GameApp.MsgCenter.PostTempEvent(op_data.EventName);
             GameApp.ViewManager.Close((int)ViewTypes.SelectOptionView);
         });
     }

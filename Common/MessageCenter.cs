@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-/// <summary>
-/// message center
+/// <summary>/// message center
 /// 
 /// msgDic: used to define some global function that every listener may answer when called
 /// objMsgDic: used to define some single function that only the specific listener will answer
@@ -39,7 +38,11 @@ public class MessageCenter
 
     // tempDic functions -------------------------------------------------------------
     public void AddTempEvent(string eventName, Action<object> callback) {
-        _register(tempMsgDic, eventName, callback);
+        if (tempMsgDic.ContainsKey(eventName)) {
+            tempMsgDic[eventName] = callback;
+        } else {
+            tempMsgDic.Add(eventName, callback);
+        }
     }
 
     public void PostTempEvent(string eventName, object arg=null) {

@@ -25,8 +25,9 @@ public class Hero : ModelBase {
         base.OnSelectCallBack(arg);
         GameApp.ViewManager.Open(ViewTypes.HeroDesView, this);
 
-        // call the showPath command
+        // call the showPath command && register option events
         if (GameApp.FightManager.gameState == GameState.FightPlayerUnit && !IsStop && !GameApp.CommandManager.isRunningCommand) {
+            addOptionEvents(); 
             GameApp.CommandManager.AddCommand(new ShowPathCommand(this));
         }
     }
@@ -35,6 +36,26 @@ public class Hero : ModelBase {
     {
         base.OnUnSelectCallBack(arg);
         GameApp.ViewManager.Close((int)ViewTypes.HeroDesView);
+    }
+
+    private void addOptionEvents() {
+        // add hero's options into Temp Events
+        GameApp.MsgCenter.AddTempEvent(Defines.OnAttackEvent, onAttackCallBack);
+        GameApp.MsgCenter.AddTempEvent(Defines.OnIdleEvent, onIdleCallBack);
+        GameApp.MsgCenter.AddTempEvent(Defines.OnCancelEvent, onCancelCallBack);
+    }
+
+    // Option events -----------------------------------------------------------------
+    private void onAttackCallBack(object arg) {
+        Debug.Log("attack");
+    }
+
+    private void onIdleCallBack(object arg) {
+        IsStop = true;
+    }
+
+    private void onCancelCallBack(object arg) {
+        GameApp.CommandManager.UnDo();
     }
 
 }
