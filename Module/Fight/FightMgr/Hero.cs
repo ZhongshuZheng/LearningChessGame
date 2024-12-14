@@ -6,7 +6,9 @@ using UnityEngine;
 /// <summary>
 /// Hero Monobehaviour in battle ground
 /// </summary>
-public class Hero : ModelBase {
+public class Hero : ModelBase, ISkill {
+
+    public SkillProperty skillPro { get; set; }
 
     public void Init(Dictionary<string, string> data, int row, int col) {
         this.Data = data;
@@ -18,6 +20,7 @@ public class Hero : ModelBase {
         Step = int.Parse(data["Step"]);
         MaxHp = int.Parse(data["Hp"]);
         CurHp = MaxHp;
+        skillPro = new SkillProperty(int.Parse(data["Skill"]));
     }
 
     protected override void OnSelectCallBack(object arg)
