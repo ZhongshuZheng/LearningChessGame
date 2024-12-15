@@ -175,4 +175,38 @@ public class MapManager {
     }
 
 
+    // Skill range functions ----------------------------------------------------------------
+    public void ShowSkillRange(ModelBase model, int attackRange, Color color) {
+        // collect the grid in a square, and every one if it's distance is under the given range
+        int minRow = model.RowIndex - attackRange > 0 ? model.RowIndex - attackRange : 0;
+        int maxRow = model.RowIndex + attackRange < rowCount - 1 ? model.RowIndex + attackRange : rowCount - 1;
+        int minCol = model.ColIndex - attackRange > 0 ? model.ColIndex - attackRange : 0;
+        int maxCol = model.ColIndex + attackRange < colCount - 1 ? model.ColIndex + attackRange : colCount - 1;
+
+        for (int r = minRow; r <= maxRow; r++) {
+            for (int c = minCol; c <= maxCol; c++) {
+                if (Mathf.Abs(model.RowIndex - r) + Mathf.Abs(model.ColIndex - c) <= attackRange) {
+                    mapArr[r, c].ShowGrid(color);
+                }
+            }
+        }
+    }
+
+    public void HideSkillRange(ModelBase model, int attackRange) {
+        // collect the grid in a square, and every one if it's distance is under the given range
+        int minRow = model.RowIndex - attackRange > 0 ? model.RowIndex - attackRange : 0;
+        int maxRow = model.RowIndex + attackRange < rowCount - 1 ? model.RowIndex + attackRange : rowCount - 1;
+        int minCol = model.ColIndex - attackRange > 0 ? model.ColIndex - attackRange : 0;
+        int maxCol = model.ColIndex + attackRange < colCount - 1 ? model.ColIndex + attackRange : colCount - 1;
+
+        for (int r = minRow; r <= maxRow; r++) {
+            for (int c = minCol; c <= maxCol; c++) {
+                if (Mathf.Abs(model.RowIndex - r) + Mathf.Abs(model.ColIndex - c) <= attackRange) {
+                    mapArr[r, c].HideGrid();
+                }
+            }
+        }
+    }
+
+
 }

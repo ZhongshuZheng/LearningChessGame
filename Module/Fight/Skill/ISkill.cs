@@ -6,4 +6,7 @@ public interface ISkill {
 
     SkillProperty skillPro { get; set; }
 
+    void ShowSkillRange() {}
+    void HideSkillRange() {}
+
 }

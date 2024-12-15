@@ -8,8 +8,6 @@ using UnityEngine;
 /// </summary>
 public class Hero : ModelBase, ISkill {
 
-    public SkillProperty skillPro { get; set; }
-
     public void Init(Dictionary<string, string> data, int row, int col) {
         this.Data = data;
         this.RowIndex = row;
@@ -50,7 +48,7 @@ public class Hero : ModelBase, ISkill {
 
     // Option events -----------------------------------------------------------------
     private void onAttackCallBack(object arg) {
-        Debug.Log("attack");
+        GameApp.CommandManager.AddCommand(new ShowSkillRangeCommand(this));
     }
 
     private void onIdleCallBack(object arg) {
@@ -59,6 +57,17 @@ public class Hero : ModelBase, ISkill {
 
     private void onCancelCallBack(object arg) {
         GameApp.CommandManager.UnDo();
+    }
+
+    // ISkill implementation ----------------------------------------------------------------
+    public SkillProperty skillPro { get; set; }
+
+    public void ShowSkillRange() {
+        GameApp.MapManager.ShowSkillRange(this, skillPro.AttackRange, Color.red);
+    }
+
+    public void HideSkillRange() {
+        GameApp.MapManager.HideSkillRange(this, skillPro.AttackRange);
     }
 
 }

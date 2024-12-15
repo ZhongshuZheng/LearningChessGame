@@ -26,6 +26,7 @@ public class SkillProperty {
         Name = data["Name"];
         Attack = int.Parse(data["Atk"]);
         AttackCount = int.Parse(data["AtkCount"]);
+        AttackRange = int.Parse(data["Range"]);
         Target = int.Parse(data["Target"]);
         TargetType = int.Parse(data["TargetType"]);
         Sound = data["Sound"];
