@@ -106,8 +106,33 @@ public class ModelBase : MonoBehaviour {
         return false;
     }
 
+    public virtual void GotHit(ISkill skill) {
+
+    }
+
+    public void LookAtModel(ModelBase target) {
+        if (target.transform.position.x > transform.position.x && transform.localScale.x < 0) {
+            Flip();
+        } else if (target.transform.position.x < transform.position.x && transform.localScale.x > 0) {
+            Flip();
+        }
+    }
+
     public void PlayAnimation(string animName) {
         ani.Play(animName);
+    }
+
+    public float GetDis(ModelBase target) {
+        return Mathf.Abs(RowIndex - target.RowIndex) + Mathf.Abs(ColIndex - target.ColIndex);
+    }
+
+    public virtual void PlayEffect(string effectName) {
+        GameObject effect = Instantiate(Resources.Load($"Effect/{effectName}")) as GameObject;
+        effect.transform.position = transform.position;
+    }
+
+    public virtual void PlaySound(string soundName) { 
+        GameApp.SoundManager.playEffect(soundName, transform.position);
     }
 
 }

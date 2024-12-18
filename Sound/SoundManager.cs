@@ -86,4 +86,16 @@ public class SoundManager
         bgmSource.Play();
     }
 
+    public void playEffect(string res, Vector3 position) 
+    {
+        if(isStop)
+        {
+            return;
+        }
+        if (!clips.ContainsKey(res)) {
+            clips.Add(res, Resources.Load<AudioClip>($"Sounds/{res}")); 
+        }
+        AudioSource.PlayClipAtPoint(clips[res], position);
+    }
+
 }
