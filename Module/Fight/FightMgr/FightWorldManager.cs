@@ -65,7 +65,6 @@ public class FightWorldManager {
             GameApp.MapManager.SetBlockType(ienemy.RowIndex, ienemy.ColIndex, BlockType.Obstacle);
             enemies.Add(ienemy);
         }
-        Debug.Log($"enemy count:{enemies.Count}");
     }
 
     public void AddHero(Block b, Dictionary<string, string> heroData) {

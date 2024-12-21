@@ -23,6 +23,9 @@ public class Hero : ModelBase, ISkill {
 
     protected override void OnSelectCallBack(object arg)
     {
+        if (GameApp.CommandManager.isRunningCommand) {
+            return;
+        }
         base.OnSelectCallBack(arg);
         GameApp.ViewManager.Open(ViewTypes.HeroDesView, this);
 
@@ -63,7 +66,9 @@ public class Hero : ModelBase, ISkill {
     public SkillProperty skillPro { get; set; }
 
     public void ShowSkillRange() {
-        GameApp.MapManager.ShowSkillRange(this, skillPro.AttackRange, Color.red);
+        GameApp.TimerManager.Register(0.1f, () => {
+            GameApp.MapManager.ShowSkillRange(this, skillPro.AttackRange, Color.red);
+        });
     }
 
     public void HideSkillRange() {

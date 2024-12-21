@@ -29,11 +29,10 @@ public class CommandManager {
             if (currentCommand.Update(dt)) {
                 currentCommand = null;
             }
-        } else {
-            if (willDoCommandsQueue.Count > 0) {
-                currentCommand = willDoCommandsQueue.Dequeue(); 
-                currentCommand.Do();
-            }
+        } 
+        if (currentCommand == null && willDoCommandsQueue.Count > 0) {
+            currentCommand = willDoCommandsQueue.Dequeue(); 
+            currentCommand.Do();
         }
     }
 

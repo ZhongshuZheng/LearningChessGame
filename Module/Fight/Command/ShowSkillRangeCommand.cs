@@ -20,10 +20,15 @@ public class ShowSkillRangeCommand : BaseCommand {
     public override bool Update(float dt) {
         if (Input.GetMouseButtonDown(0)) {
             skill.HideSkillRange();
-            Debug.Log("attack");
-            return true;
+            if (skill.GetTargets() != null) {
+                GameApp.CommandManager.AddCommand(new SkillCommand(model));
+                return true;
+            }
+            skill.ShowSkillRange();
         } else if (Input.GetMouseButtonDown(1)) {
             skill.HideSkillRange();
+            GameApp.CommandManager.UnDo();
+            GameApp.CommandManager.UnDo();
             return true;
         }
         return false;

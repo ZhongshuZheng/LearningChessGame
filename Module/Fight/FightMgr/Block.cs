@@ -33,7 +33,9 @@ public class Block : MonoBehaviour {
     } 
 
     private void OnSelectCallBack(object arg) {
-        GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+        if (!GameApp.CommandManager.isRunningCommand) {
+            GameApp.MsgCenter.PostEvent(Defines.OnUnSelectEvent);
+        }
     }
     private void OnUnSelectCallBack(object arg) {
         dirSp.sprite = null;

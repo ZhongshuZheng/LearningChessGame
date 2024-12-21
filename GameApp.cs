@@ -25,6 +25,7 @@ public class GameApp : Singleton<GameApp>
     public static GameDataManager GameDataManager;
     public static UserInputManager UserInputManager;
     public static CommandManager CommandManager;
+    public static SkillManager SkillManager;
 
     public override void Init()
     {
@@ -40,6 +41,7 @@ public class GameApp : Singleton<GameApp>
         GameDataManager = new GameDataManager();
         UserInputManager = new UserInputManager();
         CommandManager = new CommandManager();
+        SkillManager = new SkillManager();
     }
 
     public override void Update(float dt)
@@ -49,5 +51,6 @@ public class GameApp : Singleton<GameApp>
         FightManager.Update(dt);
         UserInputManager.Update();
         CommandManager.Update(dt);
+        SkillManager.Update(dt);
     }
 }
